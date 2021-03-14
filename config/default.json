@@ -1,5 +1,6 @@
 {
   "port": 5000,
   "jwtSecretKey": "batanix14",
-  "mongoUri": "mongodb+srv://worm:43hiruvA@cluster0.kefqu.mongodb.net/app?retryWrites=true&w=majority"
+  "mongoUri": "mongodb+srv://worm:43hiruvA@cluster0.kefqu.mongodb.net/app?retryWrites=true&w=majority",
+  "baseUrl": "http://localhost:5000"
 }
