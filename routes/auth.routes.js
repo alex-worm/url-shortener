@@ -38,7 +38,7 @@ router.post(
             await user.save();
 
             res.status(201).json({message: 'User created'});
-        } catch (ex) {
+        } catch (e) {
             res.status(500).json({message: 'Something wrong, try again...'});
         }
     });
@@ -81,7 +81,7 @@ router.post(
             );
 
             res.json({token, userId: user.id});
-        } catch (ex) {
+        } catch (e) {
             res.status(500).json({message: 'Something wrong, try again...'});
         }
     });

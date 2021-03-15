@@ -5,8 +5,8 @@ import {AuthContext} from '../context/AuthContext';
 export const Navbar = () => {
     const auth = useContext(AuthContext);
 
-    const logoutHandler = ev => {
-        ev.preventDefault();
+    const logoutHandler = event => {
+        event.preventDefault();
 
         auth.logout();
     };

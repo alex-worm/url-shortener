@@ -9,8 +9,8 @@ export const CreatePage = () => {
     const {request} = useHttp();
     const [link, setLink] = useState('');
 
-    const pressHandler = async ev => {
-        if (ev.key === 'Enter') {
+    const pressHandler = async event => {
+        if (event.key === 'Enter') {
             try {
                 const data = await request('/api/link/generate', 'POST', {from: link}, {
                     Authorization: `Bearer ${auth.token}`
@@ -18,7 +18,7 @@ export const CreatePage = () => {
 
                 history.push(`/detail/${data.link._id}`);
             } catch (e) {
-                ///////////////////////////////
+
             }
         }
     };
@@ -35,7 +35,7 @@ export const CreatePage = () => {
                            id="link"
                            type="text"
                            value={link}
-                           onChange={e => setLink(e.target.value)}
+                           onChange={event => setLink(event.target.value)}
                            onKeyPress={pressHandler}/>
                     <label htmlFor="link">Enter link</label>
                 </div>

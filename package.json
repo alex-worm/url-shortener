@@ -9,6 +9,8 @@
     "start": "node app.js",
     "server": "nodemon app.js",
     "client": "yarn --cwd client start",
+    "client:install": "yarn --cwd client install",
+    "client:build": "yarn --cwd client build",
     "dev": "concurrently \"yarn server\" \"yarn client\""
   },
   "dependencies": {

@@ -21,16 +21,16 @@ export const AuthPage = () => {
         window.M.updateTextFields();
     }, []);
 
-    const changeHandler = ev => {
-        setForm({...form, [ev.target.name]: ev.target.value});
+    const changeHandler = event => {
+        setForm({...form, [event.target.name]: event.target.value});
     };
 
     const registerHandler = async () => {
         try {
             const data = await request('/api/auth/register', 'POST', {...form});
             message(data.message);
-        } catch (ex) {
-            ///////////////////////////////////////////
+        } catch (e) {
+            message(e.message);
         }
     };
 
@@ -38,8 +38,8 @@ export const AuthPage = () => {
         try {
             const data = await request('/api/auth/login', 'POST', {...form});
             auth.login(data.token, data.userId);
-        } catch (ex) {
-            ///////////////////////////////////////////
+        } catch (e) {
+            message(e.message);
         }
     };
 
