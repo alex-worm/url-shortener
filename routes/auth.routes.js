@@ -65,7 +65,7 @@ router.post(
             const user = await User.findOne({email});
 
             if (!user) {
-                return res.statis(400).json({message: 'User not found'});
+                return res.status(400).json({message: 'User not found'});
             }
 
             const isMatch = await bcrypt.compare(password, user.password);

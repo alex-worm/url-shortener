@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     }
 
     try {
-        const token = req.header.authorization.split(' ')[1]; // "Bearer TOKEN"
+        const token = req.headers.authorization.split(' ')[1]; // "Bearer TOKEN"
 
         if (!token) {
             return res.status(401).json({message: 'No authorization'});
@@ -16,6 +16,6 @@ module.exports = (req, res, next) => {
         req.user = jwt.verify(token, config.get('jwtSecretKey'));
         next();
     } catch (ex) {
-        res.status(401).json({message: 'No authorization'});
+        res.status(401).json({message: 'No authorization 1'});
     }
 };
