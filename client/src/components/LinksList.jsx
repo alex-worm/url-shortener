@@ -1,16 +1,16 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
 export const LinksList = ({links}) => {
     if (!links.length) {
-        return <p className="center">No links yet</p>;
+        return <h1 className="center">No links yet</h1>;
     }
 
     return (
-        <table className="striped">
+        <table className="striped container">
             <thead>
             <tr>
                 <th>#</th>
+                <th>Icon</th>
                 <th>Original link</th>
                 <th>Shortened link</th>
                 <th>Open</th>
@@ -22,10 +22,13 @@ export const LinksList = ({links}) => {
                 return (
                     <tr key={link._id}>
                         <td>{index + 1}</td>
-                        <td>{link.from}</td>
+                        <td style={{lineHeight: '0'}}>
+                            <img src={`https://www.google.com/s2/favicons?domain_url=${link.from}`} alt=' '/>
+                        </td>
+                        <td className="originalLink">{link.from}</td>
                         <td>{link.to}</td>
                         <td>
-                            <Link to={`/detail/${link._id}`}>Open</Link>
+                            <a className="waves-effect waves-light btn-small" href={`/detail/${link._id}`}>Open</a>
                         </td>
                     </tr>
                 );

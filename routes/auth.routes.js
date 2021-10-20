@@ -38,15 +38,15 @@ router.post(
             await user.save();
 
             res.status(201).json({message: 'User created'});
-        } catch (e) {
-            res.status(500).json({message: 'Something wrong, try again...'});
+        } catch (error) {
+            res.status(500).json({message: error.message || 'Something wrong, try again...'});
         }
     });
 // /api/auth/login
 router.post(
     '/login',
     [
-        check('email', 'Enter correct email').normalizeEmail().isEmail(),
+        check('email', 'Enter correct email').isEmail(),
         check('password', 'Enter password').exists()
     ],
     async (req, res) => {
@@ -81,8 +81,8 @@ router.post(
             );
 
             res.json({token, userId: user.id});
-        } catch (e) {
-            res.status(500).json({message: 'Something wrong, try again...'});
+        } catch (error) {
+            res.status(500).json({message: error.message || 'Something wrong, try again...'});
         }
     });
 

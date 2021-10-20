@@ -1,1 +1,8 @@
 @import "~materialize-css/dist/css/materialize.min.css";
+
+.originalLink {
+    max-width: 30vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
