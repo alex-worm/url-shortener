@@ -10,7 +10,7 @@ export const DetailPage = () => {
     const history = useHistory();
     const message = useMessage();
     const {token} = useContext(AuthContext);
-    const {request, loading, error, clearError} = useHttp();
+    const {request, loading} = useHttp();
     const [link, setLink] = useState(null);
     const linkId = useParams().id;
 
@@ -26,12 +26,18 @@ export const DetailPage = () => {
         }
     }, [token, linkId, request, history]);
 
+    const onCopy = async () => {
+        await navigator.clipboard.writeText(link.to);
+        message('Copied to clipboard');
+    }
+
     const onDelete = async () => {
         try {
             await request(`/api/link/delete/${linkId}`, 'DELETE', null, {
                 Authorization: `Bearer ${token}`
             });
 
+            message('Deleted');
             history.push(`/links`);
         } catch (error) {
         }
@@ -40,11 +46,6 @@ export const DetailPage = () => {
     useEffect(() => {
         getLink();
     }, [getLink]);
-
-    useEffect(() => {
-        message(error);
-        clearError();
-    }, [error, message, clearError]);
 
     if (loading) {
         return <Loader/>;
@@ -55,6 +56,11 @@ export const DetailPage = () => {
             {!loading && link &&
                 <>
                     <LinkCard link={link}/>
+                    <button className="waves-effect btn"
+                            style={{marginRight: 10}}
+                            onClick={onCopy}>
+                        Copy
+                    </button>
                     <button className="waves-effect red btn" onClick={onDelete}>Delete</button>
                 </>
             }

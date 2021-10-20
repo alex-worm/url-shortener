@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHttp } from '../hooks/http.hook';
 import { useMessage } from '../hooks/message.hook';
 import { AuthContext } from '../context/AuthContext';
@@ -7,7 +7,7 @@ import { Loader } from '../components/Loader';
 export const AuthPage = () => {
     const auth = useContext(AuthContext);
     const message = useMessage();
-    const {loading, request, error, clearError} = useHttp();
+    const {loading, request} = useHttp();
     const [form, setForm] = useState({
         email: '',
         password: ''
@@ -32,11 +32,6 @@ export const AuthPage = () => {
         } catch (error) {
         }
     };
-
-    useEffect(() => {
-        message(error);
-        clearError();
-    }, [error, message, clearError]);
 
     return (
         <div className="row">

@@ -7,7 +7,7 @@ import { useMessage } from '../hooks/message.hook';
 
 export const LinksPage = () => {
     const [links, setLinks] = useState([]);
-    const {loading, request, error, clearError} = useHttp();
+    const {loading, request} = useHttp();
     const message = useMessage();
     const {token} = useContext(AuthContext);
 
@@ -26,11 +26,6 @@ export const LinksPage = () => {
     useEffect(() => {
         fetchLinks();
     }, [fetchLinks]);
-
-    useEffect(() => {
-        message(error);
-        clearError();
-    }, [error, message, clearError]);
 
     if (loading) {
         return <Loader/>;

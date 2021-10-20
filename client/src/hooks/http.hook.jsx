@@ -1,10 +1,12 @@
 import { useCallback, useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useMessage } from './message.hook';
 
 export const useHttp = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const auth = useContext(AuthContext);
+    const message = useMessage();
 
     const request = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
         try {
@@ -29,13 +31,15 @@ export const useHttp = () => {
             setLoading(false);
             setError(error.message);
 
+            message(error);
+
             if (error.message === 'No authorization') {
                 auth.logout();
             }
 
             throw error;
         }
-    }, [auth]);
+    }, [auth, message]);
 
     const clearError = useCallback(() => setError(null), []);
 

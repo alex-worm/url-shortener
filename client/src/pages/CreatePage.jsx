@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useHistory } from 'react-router-dom';
 import { useHttp } from '../hooks/http.hook';
 import { useMessage } from '../hooks/message.hook';
-import { FocusOnKeyPress } from '../services/FocusOnKeyPress';
 import { Loader } from '../components/Loader';
 
 export const CreatePage = () => {
     const history = useHistory();
     const message = useMessage();
     const auth = useContext(AuthContext);
-    const {request, loading, error, clearError} = useHttp();
+    const {request, loading} = useHttp();
     const [link, setLink] = useState('');
     const linkInput = useRef();
 
@@ -29,20 +28,8 @@ export const CreatePage = () => {
     };
 
     const clearHandler = () => {
-        setLink('');
-        setTimeout(() => window.M.updateTextFields());
+        setLink('', () => window.M.updateTextFields());
     };
-
-    useEffect(() => {
-        window.addEventListener('keypress', () => FocusOnKeyPress(linkInput));
-
-        return window.removeEventListener('keypress', () => FocusOnKeyPress(linkInput));
-    }, [linkInput]);
-
-    useEffect(() => {
-        message(error);
-        clearError();
-    }, [error, message, clearError]);
 
     return (
         <div className="row">
@@ -51,7 +38,7 @@ export const CreatePage = () => {
                     <input id="link"
                            type="text"
                            value={link}
-                           onChange={event => setLink(event.target.value)}
+                           onChange={event => setLink(event.target.value.trim())}
                            onKeyPress={pressHandler}
                            ref={linkInput}/>
                     <label htmlFor="link">Paste the link</label>
