@@ -11,7 +11,7 @@ router.post(
     '/register',
     [
         check('email', 'Incorrect email').isEmail(),
-        check('password', 'Min length of password is 6').isLength({min: 6})
+        check('password', 'Incorrect password').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
     ],
     async (req, res) => {
         try {

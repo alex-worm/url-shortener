@@ -23,7 +23,7 @@ export const AuthPage = () => {
             return;
         }
 
-        if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/g.test(password.current.value)) {
+        if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password.current.value)) {
             password.current.classList.remove("invalid");
             password.current.classList.add("valid");
         } else {
