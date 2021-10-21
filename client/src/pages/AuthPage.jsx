@@ -30,7 +30,7 @@ export const AuthPage = () => {
             password.current.classList.remove("valid");
             password.current.classList.add("invalid");
         }
-    }, [password, form]);
+    }, [password]);
 
     const registerHandler = async () => {
         try {
