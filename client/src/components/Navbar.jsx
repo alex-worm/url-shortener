@@ -13,7 +13,7 @@ export const Navbar = () => {
     return (
         <nav>
             <div className="nav-wrapper" style={{padding: '0 2rem'}}>
-                <a href="/" className="brand-logo">Link shortening</a>
+                <a href="/" className="brand-logo">Link shortener</a>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><NavLink to="/create">Create</NavLink></li>
                     <li><NavLink to="/links">Links</NavLink></li>

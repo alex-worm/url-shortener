@@ -8,6 +8,7 @@ const router = Router();
 
 router.post('/generate', auth, async (req, res) => {
     try {
+        console.log(req);
         const baseUrl = config.get('baseUrl');
         const {from} = req.body;
         new URL(from);

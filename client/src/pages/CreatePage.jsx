@@ -28,7 +28,8 @@ export const CreatePage = () => {
     };
 
     const clearHandler = () => {
-        setLink('', () => window.M.updateTextFields());
+        setLink('');
+        setTimeout(() => window.M.updateTextFields());
     };
 
     return (

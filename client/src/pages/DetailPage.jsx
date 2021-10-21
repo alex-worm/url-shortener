@@ -27,8 +27,12 @@ export const DetailPage = () => {
     }, [token, linkId, request, history]);
 
     const onCopy = async () => {
-        await navigator.clipboard.writeText(link.to);
-        message('Copied to clipboard');
+        try {
+            await navigator.clipboard.writeText(link.to);
+            message('Copied to clipboard');
+        } catch (error) {
+            message(error.message);
+        }
     }
 
     const onDelete = async () => {

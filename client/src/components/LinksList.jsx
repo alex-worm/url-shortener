@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export const LinksList = ({links}) => {
     if (!links.length) {
@@ -22,13 +23,13 @@ export const LinksList = ({links}) => {
                 return (
                     <tr key={link._id}>
                         <td>{index + 1}</td>
-                        <td style={{lineHeight: '0'}}>
+                        <td style={{lineHeight: 0}}>
                             <img src={`https://www.google.com/s2/favicons?domain_url=${link.from}`} alt=' '/>
                         </td>
                         <td className="originalLink">{link.from}</td>
                         <td>{link.to}</td>
                         <td>
-                            <a className="waves-effect waves-light btn-small" href={`/detail/${link._id}`}>Open</a>
+                            <NavLink className="waves-effect waves-light btn-small" to={`/detail/${link._id}`}>Open</NavLink>
                         </td>
                     </tr>
                 );
