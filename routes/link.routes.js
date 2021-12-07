@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const config = require('config');
+const config = require('../config/default.json');
 const shortid = require('shortid');
 const Link = require('../models/Link');
 const auth = require('../middleware/auth.middleware');
@@ -9,7 +9,7 @@ const router = Router();
 router.post('/generate', auth, async (req, res) => {
     try {
         console.log(req);
-        const baseUrl = config.get('baseUrl');
+        const baseUrl = config.baseUrl;
         const {from} = req.body;
         new URL(from);
 

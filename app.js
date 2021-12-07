@@ -1,5 +1,5 @@
 const express = require('express');
-const config = require('config');
+const config = require('./config/default.json');
 const mongoose = require('mongoose');
 
 const app = express();
@@ -10,11 +10,11 @@ app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/link', require('./routes/link.routes'));
 app.use('/t/', require('./routes/redirect.routes'));
 
-const PORT = config.get('port') || 5000;
+const PORT = config.port || 5000;
 
 const start = async () => {
     try {
-        await mongoose.connect(config.get('mongoUri'), {
+        await mongoose.connect(config.mongoUri, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true

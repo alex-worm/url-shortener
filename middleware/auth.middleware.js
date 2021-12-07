@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const config = require('config');
+const config = require('../config/default.json');
 
 module.exports = (req, res, next) => {
     if (req.method === 'OPTIONS') {
@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
             return res.status(401).json({message: 'No authorization'});
         }
 
-        req.user = jwt.verify(token, config.get('jwtSecretKey'));
+        req.user = jwt.verify(token, config.jwtSecretKey);
         next();
     } catch (e) {
         res.status(401).json({message: 'No authorization'});
