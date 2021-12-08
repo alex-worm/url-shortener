@@ -1,9 +1,34 @@
 const express = require('express');
 const config = require('./config/default.json');
 const mongoose = require('mongoose');
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'URL Shortener API',
+            version: '1.1.0',
+            description: 'Amogus API documentation',
+        },
+        host: 'localhost:3000',
+        basePath: '/',
+    },
+    apis: ['./routes/*.js'],
+};
+
+const cssOptions = {
+    customCss: '.topbar-wrapper img {content:url(\'https://among-us.io/wp-content/uploads/2020/09/among-us-logo.png\');}',
+    customSiteTitle: 'Amogus',
+    customfavIcon: 'https://github.com/alex-worm/url-shortener/blob/master/favicon-32x32.png',
+}
+
+const specs = swaggerJsDoc(options);
 
 const app = express();
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, cssOptions));
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth.routes'));
