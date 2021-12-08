@@ -6,6 +6,7 @@ import { useAuth } from './hooks/auth.hook';
 import { AuthContext } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { Loader } from './components/Loader';
+import { Footer } from './components/Footer';
 
 function App() {
     const {token, login, logout, userId, ready} = useAuth();
@@ -25,6 +26,7 @@ function App() {
                 <div className="container">
                     {routes}
                 </div>
+                <Footer/>
             </Router>
         </AuthContext.Provider>
     );

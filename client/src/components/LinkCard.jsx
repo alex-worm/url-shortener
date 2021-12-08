@@ -15,7 +15,7 @@ export const LinkCard = ({link}) => {
                 <img src={`https://www.google.com/s2/favicons?domain_url=${link.from}`} alt=' '/>
             </p>
             <p>Your link: <a href={link.to} target="_blank" rel="noopener noreferrer">{link.to}</a></p>
-            <p style={styleForLink}>From: <a href={link.from} target="_blank" rel="noopener noreferrer">{link.from}</a></p>
+            <p style={styleForLink}>Target link: <a href={link.from} target="_blank" rel="noopener noreferrer">{link.from}</a></p>
             <p>Clicks count: <strong>{link.clicks}</strong></p>
             <p>Date of creation: <strong>{new Date(link.date).toLocaleDateString()}</strong></p>
         </>
