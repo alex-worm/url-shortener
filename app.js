@@ -16,12 +16,21 @@ const options = {
         basePath: '/',
     },
     apis: ['./routes/*.js'],
+    securityDefinitions: {
+        bearerAuth: {
+            type: 'apiKey',
+            name: 'auth',
+            scheme: 'bearer',
+            in: 'header',
+        },
+    },
+    security: [{ bearerAuth: [] }],
 };
 
 const cssOptions = {
     customCss: '.topbar-wrapper img {content:url(\'https://among-us.io/wp-content/uploads/2020/09/among-us-logo.png\');}',
     customSiteTitle: 'Amogus',
-    customfavIcon: 'https://github.com/alex-worm/url-shortener/blob/master/favicon-32x32.png',
+    customfavIcon: 'https://github.com/alex-worm/url-shortener/blob/master/favicon-32x32.png?raw=true',
 }
 
 const specs = swaggerJsDoc(options);
@@ -33,6 +42,7 @@ app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/link', require('./routes/link.routes'));
+app.use('/api/subscription', require('./routes/subscription.routes'));
 app.use('/t/', require('./routes/redirect.routes'));
 
 const PORT = config.port || 5000;
