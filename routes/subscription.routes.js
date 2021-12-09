@@ -83,10 +83,12 @@ const router = Router();
  *      schema:
  *        type: string
  *        required: true
- *    - in: body
- *      name: body
- *      schema:
- *        $ref: '#/components/schemas/Subscription'
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Subscription'
  *    responses:
  *      '201':
  *        description: A successful response
@@ -102,7 +104,7 @@ const router = Router();
 
 router.get('/', async (req, res) => {
   try {
-    const subscriptions = await Subscription.all();
+    const subscriptions = await Subscription.find({});
 
     if (subscriptions) {
       return res.json(subscriptions);
@@ -116,6 +118,7 @@ router.get('/', async (req, res) => {
 
 router.post('/create', async (req, res) => {
   try {
+    console.log(req.body);
     const { name, description, transactionLink, linksAvailable, imageUrl } = req.body;
 
     const existing = await Subscription.findOne({ name });

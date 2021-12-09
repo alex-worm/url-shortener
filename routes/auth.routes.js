@@ -6,6 +6,32 @@ const {check, validationResult} = require('express-validator');
 const User = require('../models/User');
 
 const router = Router();
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    User:
+ *      type: object
+ *      required:
+ *        - email
+ *        - password
+ *        - subscription
+ *      properties:
+ *        email:
+ *          type: string
+ *          format: email
+ *        password:
+ *          type: string
+ *          format: password
+ *        subscription:
+ *          type: string
+ *        links:
+ *          type: array
+ *          items:
+ *            ref: '#/components/schemas/Link'
+ */
+
 // /api/auth/register
 router.post(
     '/register',
@@ -33,7 +59,7 @@ router.post(
             }
 
             const hashedPassword = await bcrypt.hash(password, 12);
-            const user = new User({email, password: hashedPassword});
+            const user = new User({email, password: hashedPassword, subscription: 'Free'});
 
             await user.save();
 

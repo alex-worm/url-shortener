@@ -1,7 +1,10 @@
 const {Router} = require('express');
 const config = require('../config/default.json');
 const shortid = require('shortid');
+const ObjectId = require('mongoose').Types.ObjectId;
 const Link = require('../models/Link');
+const Subscription = require('../models/Subscription');
+const User = require('../models/User');
 const auth = require('../middleware/auth.middleware');
 
 const router = Router();
@@ -108,10 +111,15 @@ const router = Router();
  *      schema:
  *        type: string
  *        required: true
- *    - in: body
- *      name: body
- *      schema:
- *        $ref: '#/components/schemas/Link'
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              from:
+ *                type: string
  *    responses:
  *      '201':
  *        description: A successful response
@@ -163,6 +171,14 @@ router.post('/generate', auth, async (req, res) => {
 
         if (existing) {
             res.status(409).json({message: 'Link already exists'});
+            return;
+        }
+
+        const user = await User.findOne({_id: new ObjectId(req.user.userId)});
+        const subscription = await Subscription.findOne({name: user.subscription});
+
+        if (subscription.linksAvailable <= user.links.length) {
+            res.status(409).json({message: 'Subscription limit reached'});
             return;
         }
 
