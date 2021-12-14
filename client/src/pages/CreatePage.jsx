@@ -17,7 +17,7 @@ export const CreatePage = () => {
         if (event.key === 'Enter' || event.type === 'click') {
             try {
                 const data = await request('/api/link/generate', 'POST', {from: link}, {
-                    Authorization: `Bearer ${auth.token}`
+                    auth: `Bearer ${auth.token}`
                 });
                 message(data.message);
 

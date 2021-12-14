@@ -17,7 +17,7 @@ export const DetailPage = () => {
     const getLink = useCallback(async () => {
         try {
             const fetched = await request(`/api/link/${linkId}`, 'GET', null, {
-                Authorization: `Bearer ${token}`
+                auth: `Bearer ${token}`
             });
 
             setLink(fetched);
@@ -38,7 +38,7 @@ export const DetailPage = () => {
     const onDelete = async () => {
         try {
             await request(`/api/link/delete/${linkId}`, 'DELETE', null, {
-                Authorization: `Bearer ${token}`
+                auth: `Bearer ${token}`
             });
 
             message('Deleted');

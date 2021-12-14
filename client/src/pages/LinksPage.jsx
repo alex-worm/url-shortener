@@ -14,7 +14,7 @@ export const LinksPage = () => {
     const fetchLinks = useCallback(async () => {
         try {
             const data = await request('/api/link', 'GET', null, {
-                Authorization: `Bearer ${token}`
+                auth: `Bearer ${token}`
             });
             message(data.message);
 
